@@ -1,24 +1,56 @@
-//Rock Paper Scissors
+let playerScore = 0;
+let computerScore = 0;
 
-let rounds = 5;
-let scoreUser = 0;
-let scoreComputer = 0;
-//for 5 rounds
-for(let i = 1;i <= rounds;i++){
+let winningScore = 5;
 
-//Get Input from user
-let userInputRaw = prompt("Enter Your Choice:");
-let userInput = userInputRaw.charAt(0).toUpperCase() + userInputRaw.slice(1).toLowerCase();
-//get input from computer 
-let computerInput = getComputerInput();
-alert("Computer Choose " + computerInput);
-//compare the results 
-let result = game(userInput,computerInput);
-//keep count of score
-alert(result)
+let computerChoice;
+// let userInput = 
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {computerChoice = getComputerInput();updateScore(button.textContent,computerChoice,game(button.textContent,computerChoice))})
+})
+
+const playerChoiceDisplay = document.getElementById("player-choice");
+const computerChoiceDisplay = document.getElementById("computer-choice");
+const playerScoreDisplay = document.getElementById("player-score");
+const computerScoreDisplay = document.getElementById("computer-score");
+const resultDisplay = document.getElementById("result");
+
+// const rockButton = document.querySelector(".rock");//
+// const paperButton = document.querySelector(".paper");
+// const scissorsButton = document.querySelector(".scissors");
+
+// rockButton.addEventListener('click',() => {computerChoice = getComputerInput();updateScore("Rock",computerChoice,game("Rock",computerChoice))})
+// paperButton.addEventListener('click',() => {computerChoice = getComputerInput();updateScore("Paper",computerChoice,game("Paper",computerChoice))})
+// scissorsButton.addEventListener('click',() => {computerChoice = getComputerInput();updateScore("Scissors",computerChoice,game("Scissors",computerChoice))})
+
+function updateScore(playerChoice,computerChoice,result){
+
+    playerChoiceDisplay.textContent = playerChoice;
+    computerChoiceDisplay.textContent = computerChoice;
+    resultDisplay.textContent = result;
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    //placed inside as update is called everytime button is clicked
+    if(playerScore == winningScore){
+    resultDisplay.textContent = "You won the game!"
+    disableButtons()
+    }
+    if(computerScore == winningScore){
+    resultDisplay.textContent = "Computer won the game"
+    disableButtons()
+    }
+    
 }
-alert(win(scoreUser,scoreComputer))
-//declare the winner
+
+function disableButtons(){
+    buttons.forEach((button) => {
+        button.disabled = true
+    }
+    )
+}
 
 function getComputerInput(){
     let choice = Math.floor(Math.random()*3);
@@ -31,39 +63,35 @@ function game(UI,CI){
     }
     else if( UI == "Rock"){
         if(CI == "Paper"){
-            scoreComputer++;
+            computerScore++;
             return "Lose : Paper Beats Rock"
         }
         else{
-            scoreUser++;
+            playerScore++;
             return "Win : Rock beats Scissors"
         }
     }
     else if( UI == "Paper"){
         if(CI == "Rock"){
-            scoreUser++;
+            playerScore++;
             return "Win : Paper Beats Rock"
         }
         else{
-            scoreComputer++;
+            computerScore++;
             return "Lose : Scissors beats Paper"
         }
     }
     else if( UI == "Scissors"){
         if(CI == "Paper"){
-            scoreUser++;
+            playerScore++;
             return "Win : Scissors Beats Paper"
         }
         else{
-            scoreComputer++;
+            computerScore++;
             return "Lose : Rock beats Scissors"
         }
     }
     else{
         return "Enter Valid Choice"
     }
-}
-
-function win(scoreA,scoreB){
-    return scoreA == scoreB ? "Draw" : scoreA > scoreB ? "User Wins" : "Computer Wins"
 }

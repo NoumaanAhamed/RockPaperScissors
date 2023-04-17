@@ -5,8 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .game-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.player-score, .computer-score ,.player-choice ,.computer-choice{
+  display: inline-block;
+  width: 150px;
+  margin: 10px;
+}
+
+
+.buttons {
+  margin: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 18px;
+  /* cursor: pointer; */
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #fffc3d;
+}
+
+    </style>
 </head>
 <body>
+    <header>
+      <h1 style="text-align: center;">Rock Paper Scissors</h1>
+    </header>
+    <div class="game-container">
+        <div class="scoreholder">
+          <div class="player-score">
+            <p>Player Score: <span id="player-score">0</span></p>
+          </div>
+          <div class="computer-score">
+            <p>Computer Score: <span id="computer-score">0</span></p>
+          </div>
+        </div>
+        <div class="choiceholder">
+          <div class="player-choice">
+            <p>Player Choose: <span id="player-choice"></span></p>
+          </div>
+          <div class="computer-choice">
+            <p>Computer Choose: <span id="computer-choice"></span></p>
+          </div>
+        </div>
+        <div class="result">
+          <p id="result"></p>
+        </div>
+        <div class="buttons">
+          <button class="rock">Rock</button>
+          <button class="paper">Paper</button>
+          <button class="scissors">Scissors</button>
+        </div>
+      </div>
     <script src="script.js"></script>
 </body>
 </html>
